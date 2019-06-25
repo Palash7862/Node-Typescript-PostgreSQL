@@ -4,9 +4,9 @@ import User from './../models/User';
 export default class UserController {
     constructor() {}
 
-    public index(req: Request, res: Response) {
+    public async index(req: Request, res: Response) {
         let user = new User();
-        let userList = user.getUsers(); 
+        let userList = await  user.getUsers(); 
         res.status(200).json({status: 200, message: userList });
     }
 }

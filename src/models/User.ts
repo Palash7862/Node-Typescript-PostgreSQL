@@ -5,15 +5,13 @@ export default class User extends  DBConnection {
       super();
     }
 
-    public getUsers() { 
-        let datax =   this.pool.query('SELECT * FROM users ORDER BY id ASC').then((results:any) => {
-          // if (error) {
-          //   throw error;
-          // }
-          console.log(results.rows);
-          this.result = results.rows;
+    public async getUsers() { 
+        let data = await this.pool.query('SELECT * FROM users ORDER BY id ASC')
+        .then((results:any) => {
           return results.rows;
         });
-        console.log(datax); 
+       if(data){  
+        return data; 
+       }
     }
 }
