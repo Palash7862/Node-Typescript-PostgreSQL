@@ -7,10 +7,16 @@ import { ApiRoute } from "./routes/api";
 require("dotenv").config({ path: path.join(__dirname + "/../", ".env") });
 const Pool = require('pg').Pool;
 const app = express();
-
-app.use(bodyParser.json())
+var hogan = require("hogan.js");
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true,})); 
 
+app.engine('html', require('hogan-express') );
+app.set('view engine', 'html');
+app.set('layout', 'layout'); 
+app.set('partials', {foo: 'foo'});
+app.enable('view cache');
+app.set('views', __dirname);
 app.use(ApiRoute);
 
 
@@ -18,27 +24,11 @@ app.use(ApiRoute);
 
 
 app.get('/',  (request:Request, response:Response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' });
+  // response.json({ info: 'Node.js, Express, and Postgres API' });
+  // response.render('user');
+  var template = "Hello {{world}}!";
+  response.send(hogan.compile(template));
 });
-
-// app.get('/users', function (request:Request, response:Response) {
-//   pool.query('SELECT * FROM users ORDER BY id ASC', (error:any, results:any) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(200).json(results.rows)
-//   })
-// });
-// app.get('/users/:id', (request:Request, response:Response) => {
-//   response.json({ info: 'Node.js, Express, and Postgres API PK' });
-// });
-// app.get('/auth', (request:Request, response:Response) => {
-//   //VerifyUserMiddleware.isPasswordAndUserMatch(request, response, next);
-  
-//   // console.log(routeConfig());
-//   // response.json(routeConfig());
-//   // response.json({ info: 'Node.js, Express, and Postgres API PK' });
-// });
 
 //AuthRouter.routesConfig(app);
 app.set("port", process.env.PORT || 3000);

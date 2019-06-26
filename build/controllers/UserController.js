@@ -11,14 +11,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Controller_1 = __importDefault(require("./Controller"));
 const User_1 = __importDefault(require("./../models/User"));
-class UserController {
-    constructor() { }
+class UserController extends Controller_1.default {
+    constructor() {
+        super();
+    }
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let user = new User_1.default();
             let userList = yield user.getUsers();
-            res.status(200).json({ status: 200, message: userList });
+            res.render('user', { partials: { userList } });
+            //res.status(200).json({status: 200, message: userList });
         });
     }
 }
