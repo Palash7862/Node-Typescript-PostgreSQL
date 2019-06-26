@@ -21,7 +21,7 @@ class UserController extends Controller_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             let user = new User_1.default();
             let userList = yield user.getUsers();
-            res.render('user', { partials: { userList } });
+            res.render('user.html', { partials: { userList } });
             //res.status(200).json({status: 200, message: userList });
         });
     }

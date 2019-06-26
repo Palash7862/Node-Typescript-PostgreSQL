@@ -7,27 +7,23 @@ import { ApiRoute } from "./routes/api";
 require("dotenv").config({ path: path.join(__dirname + "/../", ".env") });
 const Pool = require('pg').Pool;
 const app = express();
-var hogan = require("hogan.js");
+var hbs = require('express-handlebars');
+// const hbs = require('hbs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true,})); 
 
-app.engine('html', require('hogan-express') );
-app.set('view engine', 'html');
-app.set('layout', 'layout'); 
-app.set('partials', {foo: 'foo'});
-app.enable('view cache');
-app.set('views', __dirname);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.engine('.html', hbs({
+  defaultLayout: 'main.html'
+}));
+app.set('view engine', '.html');
+
 app.use(ApiRoute);
-
-
-
-
 
 app.get('/',  (request:Request, response:Response) => {
   // response.json({ info: 'Node.js, Express, and Postgres API' });
-  // response.render('user');
-  var template = "Hello {{world}}!";
-  response.send(hogan.compile(template));
+  response.render('user'); 
 });
 
 //AuthRouter.routesConfig(app);

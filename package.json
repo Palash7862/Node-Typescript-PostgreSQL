@@ -12,7 +12,7 @@
     "watch-node": "nodemon build/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yello.bold, cyan.bold\" \"npm run watch-ts\" \"npm run watch-node\""
   },
-  "author": "",
+  "author": "MD Samsozzaman Palash <samsozzaman.sp@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -20,8 +20,9 @@
     "chai-http": "^4.3.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "hogan-express": "^0.5.2",
-    "hogan.js": "^3.0.2",
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.1.2",
+    "hbs": "^4.0.4",
     "jsonwebtoken": "^8.5.1",
     "mocha": "^6.1.4",
     "moment": "^2.24.0",
@@ -39,5 +40,6 @@
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
-  }
+  },
+  "repository": "git@github.com:Palash7862/Node-Typescript-PostgreSQL.git"
 }

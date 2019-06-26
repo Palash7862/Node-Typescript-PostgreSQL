@@ -10,7 +10,7 @@ export default class UserController extends Controller {
     public async index(req: Request, res: Response) {
         let user = new User();
         let userList = await  user.getUsers(); 
-        res.render('user', {partials: {userList} });
+        res.render('user.html', {partials: {userList} });
         //res.status(200).json({status: 200, message: userList });
     }
 }
